@@ -35,7 +35,7 @@ module.exports = merge(common, {
             }],
             mobile: true,
             lang: 'en-US',
-            bodyHtmlSnippet: '<div id="root"></div>'
+            bodyHtmlSnippet: '<div id="root"></div>',
         })
     ]
 })

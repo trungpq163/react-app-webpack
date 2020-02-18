@@ -1,7 +1,10 @@
 const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const {
+    CleanWebpackPlugin
+} = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const HtmlWebpackPluin = require('html-webpack-plugin');
 
 module.exports = merge(common, {
     mode: 'production',
@@ -17,9 +20,24 @@ module.exports = merge(common, {
         }]
     },
     plugins: [
-        new CleanWebpackPlugin(['dist/css', 'dist/js']),
+        new CleanWebpackPlugin({
+            cleanOnceBeforeBuildPatterns: ['dist/js', 'dist/css'],
+        }),
         new MiniCssExtractPlugin({
-            filename: "css/[name].css"
+            filename: "css/index.css"
+        }),
+        new HtmlWebpackPluin({
+            title: 'Webpack React Example',
+            inject: false,
+            template: require('html-webpack-template'),
+            meta: [{
+                name: 'description',
+                content: 'A better default template for html-webpack-plugin.'
+            }],
+            mobile: true,
+            lang: 'en-US',
+            bodyHtmlSnippet: '<div id="root"></div>',
+            filename: 'index.html'
         })
     ]
 });
